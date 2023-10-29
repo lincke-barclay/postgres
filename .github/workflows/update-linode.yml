@@ -1,0 +1,27 @@
+name: Docker Image Push to GHCR
+
+on:
+  push
+
+jobs:
+  build_and_publish:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - name: Build and push
+      run: |
+          docker login --username lincketheo --password ${{ secrets.GH_PAT }} ghcr.io
+          docker build . -t ghcr.io/lincketheo/communeo-psql:latest
+          docker push ghcr.io/lincketheo/communeo-psql:latest
+  deploy:
+    needs: "build_and_publish"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Executing ssh command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.LINODE_HOST }}
+          username: ${{ secrets.LINODE_USERNAME }}
+          key: ${{ secrets.LINODE_GITHUB_SSH_KEY }}
+          port: ${{ secrets.LINODE_SSH_PORT }}
+          script: echo '${{ secrets.LINODE_GITHUB_PASSWORD }}' | sudo -S systemctl restart communeo-psql
