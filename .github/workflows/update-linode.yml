@@ -21,7 +21,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.LINODE_HOST }}
-          username: ${{ secrets.LINODE_USERNAME }}
+          username: ${{ secrets.LINODE_GITHUB_USERNAME }}
           key: ${{ secrets.LINODE_GITHUB_SSH_KEY }}
           port: ${{ secrets.LINODE_SSH_PORT }}
           script: echo '${{ secrets.LINODE_GITHUB_PASSWORD }}' | sudo -S systemctl restart communeo-psql
