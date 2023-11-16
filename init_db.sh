@@ -32,7 +32,7 @@ CREATE TYPE friend_status_type AS ENUM ('ACCEPTED', 'PENDING');
 CREATE TABLE IF NOT EXISTS friendship (
     requester VARCHAR(100) NOT NULL,
     recipient VARCHAR(100) NOT NULL,
-    friend_status friend_status_type,
+    status friend_status_type,
     created_timestamp_utc TIMESTAMP NOT NULL,
     last_updated_timestamp_utc TIMESTAMP NOT NULL,
     PRIMARY KEY(requester, recipient),
