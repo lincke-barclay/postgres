@@ -3,12 +3,13 @@ set -e
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -a  <<-EOSQL
 
-\c communeo;
+\c commune;
 
 CREATE TABLE IF NOT EXISTS commune_user (
     firebase_id VARCHAR(100) NOT NULL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL
+    email VARCHAR(100) NOT NULL,
+    profile_picture_url VARCHAR(150)
 );
 
 CREATE TABLE IF NOT EXISTS event (
