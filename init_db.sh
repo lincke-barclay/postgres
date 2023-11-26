@@ -26,16 +26,10 @@ CREATE TABLE IF NOT EXISTS event (
     CONSTRAINT fk_owner FOREIGN KEY(firebase_owner_id) REFERENCES commune_user(firebase_id)
 );
 
-
-
-CREATE TYPE friend_status_type AS ENUM ('ACCEPTED', 'PENDING');
-
 CREATE TABLE IF NOT EXISTS friendship (
     requester VARCHAR(100) NOT NULL,
     recipient VARCHAR(100) NOT NULL,
-    status friend_status_type,
     created_timestamp_utc TIMESTAMP NOT NULL,
-    last_updated_timestamp_utc TIMESTAMP NOT NULL,
     PRIMARY KEY(requester, recipient),
     CONSTRAINT fk_requester FOREIGN KEY(requester) REFERENCES commune_user(firebase_id),
     CONSTRAINT fk_recipient FOREIGN KEY(recipient) REFERENCES commune_user(firebase_id)
