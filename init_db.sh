@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS invitation (
     sender_id VARCHAR(100) NOT NULL,
     recipient_id VARCHAR(100) NOT NULL,
     status invitation_status_type,
-    CHECK (sender_id != recipient_id),
+    expiration_timestamp_utc TIMESTAMP,
     CONSTRAINT fk_invitation_event FOREIGN KEY(event_id) REFERENCES event(id),
     CONSTRAINT fk_invitation_sender FOREIGN KEY(sender_id) REFERENCES commune_user(firebase_id),
     CONSTRAINT fk_invitation_recipient FOREIGN KEY(recipient_id) REFERENCES commune_user(firebase_id)
