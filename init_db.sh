@@ -20,8 +20,7 @@ CREATE TABLE IF NOT EXISTS event (
     starting_timestamp_utc TIMESTAMP NOT NULL,
     ending_timestamp_utc TIMESTAMP NOT NULL,
     title VARCHAR(100) NOT NULL,
-    short_description VARCHAR(200) NOT NULL,
-    long_description VARCHAR(1000) NOT NULL,
+    description VARCHAR(1000) NOT NULL,
     CHECK (starting_timestamp_utc >= created_timestamp_utc AND ending_timestamp_utc > starting_timestamp_utc),
     CONSTRAINT fk_owner FOREIGN KEY(firebase_owner_id) REFERENCES commune_user(firebase_id)
 );
